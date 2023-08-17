@@ -15,7 +15,7 @@ class Superhero:
         self.name: str = superhero_info["name"]
         self.alignment: str = superhero_info["biography"]["alignment"]
 
-    def define_stats(self, team_alignment: str):
+    def define_stats(self, team_alignment: str) -> None:
         actual_stamina = randint(0, 10)
         fb = 1 + randint(0, 9) if self.alignment == team_alignment else (1 + randint(0, 9))**-1
 
@@ -52,5 +52,5 @@ class Team:
         for member in self.members:
             member.define_stats(team_alignment=self.alignment)
     
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{[member.name for member in self.members]}"
