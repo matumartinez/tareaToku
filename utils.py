@@ -37,3 +37,23 @@ class SuperheroAPICaller:
         superhero_info["powerstats"]["combat"] = int(c) if c != "null" else randint(1, 100)
 
         return superhero_info
+
+
+class EmailString:
+
+    email_string = ""
+
+    def concatenate(self, string: str, bold: bool = False) -> None:
+        print(string)
+        if string == " ":
+            self.email_string += "<br></br>"
+        elif bold:
+            self.email_string += f"<div><b>{string}</b></div>"
+        else:
+            self.email_string += f"<div>{string}</div>"
+    
+    def open_string(self) -> None:
+        self.email_string += "<html><body>"
+    
+    def close_string(self) -> None:
+        self.email_string += "</body></html>"
