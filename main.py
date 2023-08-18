@@ -7,7 +7,7 @@ from os import getenv
 
 
 html = EmailString()
-TEAM_SIZE = 5  # variable should be > 0 and < 731
+TEAM_SIZE = 5  # variable should be > 0 and < 365
 EMAIL = getenv("EMAIL")
 
 
