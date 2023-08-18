@@ -15,6 +15,8 @@ def main() -> None:
     html.open_string()
     team1, team2 = setup_teams()
     simulate_battle(team1, team2)
+    if EMAIL:
+        send_email()
 
 
 def setup_teams() -> Tuple[Team]:
@@ -59,9 +61,6 @@ def simulate_battle(team1: Team, team2: Team) -> None:
     
     html.concatenate(f"Team 1 victory {team1}", bold=True) if team1.members \
         else html.concatenate(f"Team 2 victory {team2}", bold=True)
-    
-    if EMAIL:
-        send_email()
 
 
 def simulate_fight(attacker: Superhero, defender: Superhero, defender_team: Team) -> None:
