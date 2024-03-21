@@ -1,6 +1,6 @@
 from math import floor
 from random import randint
-from typing import Type
+from typing import Type, Union
 
 
 class Superhero:
@@ -26,31 +26,66 @@ class Superhero:
         power = floor((2*self.power + actual_stamina)/1.1 * fb)
         combat = floor((2*self.combat + actual_stamina)/1.1 * fb)
 
-        self.hp = floor((strength*0.8 + durability*0.7 + power)/2 * (1 + actual_stamina/10)) + 100
-        self.mental = (intelligence*0.7 + speed*0.2 + combat*0.1) * fb
-        self.strong = (strength*0.6 + power*0.2 + combat*0.2) * fb
-        self.fast = (speed*0.55 + durability*0.25 + strength*0.2) * fb
+        self.__original_hp = floor((strength*0.8 + durability*0.7 + power)/2 * (1 + actual_stamina/10)) + 100
+        self.__hp = floor((strength*0.8 + durability*0.7 + power)/2 * (1 + actual_stamina/10)) + 100
+        self.__mental = (intelligence*0.7 + speed*0.2 + combat*0.1) * fb
+        self.__strong = (strength*0.6 + power*0.2 + combat*0.2) * fb
+        self.__fast = (speed*0.55 + durability*0.25 + strength*0.2) * fb
+    
+    def restore_hp_points(self):
+        self.__hp = self.__original_hp
+
+    @property
+    def hp(self):
+        return self.__hp
+    
+    @hp.setter
+    def hp(self, new_value: Union[int, float]):
+        self.__hp = new_value
+    
+    @property
+    def mental(self):
+        return self.__mental
+    
+    @property
+    def strong(self):
+        return self.__strong
+    
+    @property
+    def fast(self):
+        return self.__fast
 
 
 class Team:
 
     def __init__(self) -> None:
-        self.good_alignment = 0
-        self.bad_alignment = 0
-        self.alignment = "good"
-        self.members = []
+        self.__good_alignment = 0
+        self.__bad_alignment = 0
+        self.__alignment = "good"
+        self.__members = []
     
     def add_superhero(self, superhero: Type[Superhero]) -> None:
-        self.members.append(superhero)
+        self.__members.append(superhero)
         if superhero.alignment == "good":
-            self.good_alignment += 1
+            self.__good_alignment += 1
         else:
-            self.bad_alignment += 1
-        self.alignment = "good" if self.good_alignment >= self.bad_alignment else "bad"
+            self.__bad_alignment += 1
+        self.__alignment = "good" if self.__good_alignment >= self.__bad_alignment else "bad"
     
     def define_team_stats(self) -> None:
         for member in self.members:
             member.define_stats(team_alignment=self.alignment)
+
+    @property
+    def members(self):
+        return self.__members
+    
+    @property
+    def alignment(self):
+        return self.__alignment
+    
+    def remove_member(self, member: Type[Superhero]):
+        self.__members.remove(member)
     
     def __str__(self) -> str:
         return f"{[member.name for member in self.members]}"

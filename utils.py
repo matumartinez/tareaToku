@@ -5,7 +5,7 @@ from os import getenv
 
 class SuperheroAPICaller:
     
-    id_list = [num for num in range(1, 732)]
+    id_list = [num for num in range(1, 733)]
     token = getenv('TOKEN')
 
     def __init__(self) -> None:
