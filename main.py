@@ -82,7 +82,7 @@ def simulate_fight(attacker: Superhero, defender: Superhero, teams: Dict[str, Te
         teams["defending_team"].remove_member(member = defender)
         attacker.restore_hp_points()
     else:
-        #If the attacker did not deafeat the defender, the roles are reverses until one of them wins
+        #If the attacker did not deafeat the defender, the roles are reversed until one of them wins
         simulate_fight(attacker = defender, defender = attacker, teams={
             "defending_team": teams["attacking_team"],
             "attacking_team": teams["defending_team"]
