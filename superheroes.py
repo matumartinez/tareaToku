@@ -1,6 +1,6 @@
 from math import floor
 from random import randint
-from typing import Type, Union
+from typing import Type, Union, List
 
 
 class Superhero:
@@ -32,27 +32,27 @@ class Superhero:
         self.__strong = (strength*0.6 + power*0.2 + combat*0.2) * fb
         self.__fast = (speed*0.55 + durability*0.25 + strength*0.2) * fb
     
-    def restore_hp_points(self):
+    def restore_hp_points(self) -> None:
         self.__hp = self.__original_hp
 
     @property
-    def hp(self):
+    def hp(self) -> Union[int, float]:
         return self.__hp
     
     @hp.setter
-    def hp(self, new_value: Union[int, float]):
+    def hp(self, new_value: Union[int, float]) -> None:
         self.__hp = new_value
     
     @property
-    def mental(self):
+    def mental(self) -> Union[int, float]:
         return self.__mental
     
     @property
-    def strong(self):
+    def strong(self) -> Union[int, float]:
         return self.__strong
     
     @property
-    def fast(self):
+    def fast(self) -> Union[int, float]:
         return self.__fast
 
 
@@ -77,14 +77,14 @@ class Team:
             member.define_stats(team_alignment=self.alignment)
 
     @property
-    def members(self):
+    def members(self) -> List[Type[Superhero]]:
         return self.__members
     
     @property
-    def alignment(self):
+    def alignment(self) -> str:
         return self.__alignment
     
-    def remove_member(self, member: Type[Superhero]):
+    def remove_member(self, member: Type[Superhero]) -> None:
         self.__members.remove(member)
     
     def __str__(self) -> str:
